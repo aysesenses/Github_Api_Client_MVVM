@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="userDetail"
+            type="com.aysesenses.domain.model.UserDetail" />
+        <variable
+            name="viewModel"
+            type="com.aysesenses.n11_casestudy.ui.viewmodel.UserDetailViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/userAvatarImageView"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:avatarImageUrl="@{userDetail.avatar_url}"
+            android:contentDescription="@string/userAvatarImageViewDescription"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/userNameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="56dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@{userDetail.name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/userAvatarImageView"
+            app:layout_constraintTop_toTopOf="@+id/userAvatarImageView"
+            tools:text="Ayşe Şenses" />
+
+        <TextView
+            android:id="@+id/userLoginTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@{userDetail.login}"
+            app:layout_constraintBottom_toBottomOf="@+id/userAvatarImageView"
+            app:layout_constraintEnd_toEndOf="@+id/userNameTextView"
+            app:layout_constraintStart_toStartOf="@+id/userNameTextView"
+            app:layout_constraintTop_toBottomOf="@+id/userNameTextView"
+            tools:text="aysesenses" />
+
+        <ImageView
+            android:id="@+id/userAddFavoriteButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:contentDescription="@string/userAvatarImageViewDescription"
+            app:layout_constraintBottom_toBottomOf="@+id/userAvatarImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/userAvatarImageView"
+            app:srcCompat="@android:drawable/btn_star_big_off" />
+
+
+        <TextView
+            android:id="@+id/followersTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Followers"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/followingTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userAvatarImageView" />
+
+        <TextView
+            android:id="@+id/followingTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Following"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/followersTextView"
+            app:layout_constraintTop_toTopOf="@+id/followersTextView" />
+
+        <TextView
+            android:id="@+id/followersCountTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@{String.valueOf(viewModel.userDetail.followers)}"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/followingCountTextView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/followingTextView"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/followingCountTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="@{String.valueOf(viewModel.userDetail.following)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/followersTextView"
+            app:layout_constraintTop_toTopOf="@id/followersCountTextView"
+            tools:text="3" />
+
+        <TextView
+            android:id="@+id/reposTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Public Repos"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/followersCountTextView"
+            app:layout_constraintStart_toStartOf="@+id/followersCountTextView"
+            app:layout_constraintTop_toBottomOf="@+id/followersCountTextView" />
+
+        <TextView
+            android:id="@+id/gistsTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Public Gist"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/followersCountTextView"
+            app:layout_constraintTop_toTopOf="@+id/reposTextView" />
+
+        <TextView
+            android:id="@+id/reposCountTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="@{String.valueOf(viewModel.userDetail.repos)}"
+            app:layout_constraintEnd_toStartOf="@+id/gistsCountTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gistsTextView"
+            tools:text="22" />
+
+        <TextView
+            android:id="@+id/gistsCountTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="@{String.valueOf(viewModel.userDetail.gists)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/reposTextView"
+            app:layout_constraintTop_toTopOf="@+id/reposCountTextView"
+            tools:text="33" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

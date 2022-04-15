@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "613109079878",
+    "project_id": "n11-casestudy",
+    "storage_bucket": "n11-casestudy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613109079878:android:bb471dd6945cc8ce374f47",
+        "android_client_info": {
+          "package_name": "com.aysesenses.n11_casestudy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613109079878-ja8v0234upg71h9u2a5m2rj20k115q35.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRsrnRNSkW8YRPpkOWtZdl3InBMULgUDs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613109079878-ja8v0234upg71h9u2a5m2rj20k115q35.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/userSearchFragment">
+
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.aysesenses.n11_casestudy.ui.view.UserDetailFragment"
+        android:label="UserDetailFragment"
+        tools:layout="@layout/fragment_user_detail">
+        <action
+            android:id="@+id/action_userDetailFragment_to_userAvatarFragment"
+            app:destination="@id/userAvatarFragment" />
+        <argument
+            android:name="userlogin"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_userDetailFragment_to_userListFragment"
+            app:destination="@id/userListFragment"
+            app:popUpTo="@id/userListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userAvatarFragment"
+        android:name="com.aysesenses.n11_casestudy.ui.view.UserAvatarFragment"
+        android:label="fragment_user_avatar"
+        tools:layout="@layout/fragment_user_avatar" >
+        <action
+            android:id="@+id/action_userAvatarFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment"
+            app:popUpTo="@id/userDetailFragment" />
+        <argument
+            android:name="userAvatarUrl"
+            app:argType="string"/>
+    </fragment>
+    <fragment
+        android:id="@+id/userListFragment"
+        android:name="com.aysesenses.n11_casestudy.ui.view.UserListFragment"
+        android:label="fragment_user_list"
+        tools:layout="@layout/fragment_user_list" >
+        <action
+            android:id="@+id/action_userListFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment"
+            app:popUpToSaveState="true"/>
+        <argument
+            android:name="term"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_userListFragment_to_userSearchFragment"
+            app:destination="@id/userSearchFragment"
+            app:popUpTo="@id/userSearchFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/userSearchFragment"
+        android:name="com.aysesenses.n11_casestudy.ui.view.UserSearchFragment"
+        android:label="fragment_user_search"
+        tools:layout="@layout/fragment_user_search" >
+
+        <action   android:id="@+id/action_userSearchFragment_to_userListFragment"
+            app:destination="@id/userListFragment">
+        </action>
+
+    </fragment>
+</navigation>

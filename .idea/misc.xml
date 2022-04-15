@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Flutter/Desktop/n11_casestudy/app/src/main/res/drawable-v24/ic_broken_image.xml" value="0.1295" />
+        <entry key="..\:/Users/Flutter/Desktop/n11_casestudy/app/src/main/res/drawable-v31/search_background.xml" value="0.186" />
+        <entry key="..\:/Users/Flutter/Desktop/n11_casestudy/app/src/main/res/drawable/ic_icons_github.xml" value="0.1295" />
+        <entry key="..\:/Users/Flutter/Desktop/n11_casestudy/app/src/main/res/drawable/search_background.xml" value="0.1455" />
+        <entry key="..\:/Users/Flutter/Desktop/n11_casestudy/app/src/main/res/layout-v21/fragment_user_search.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Flutter/Desktop/n11_casestudy/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Flutter/Desktop/n11_casestudy/app/src/main/res/layout/fragment_user_avatar.xml" value="0.1" />
+        <entry key="..\:/Users/Flutter/Desktop/n11_casestudy/app/src/main/res/layout/fragment_user_detail.xml" value="0.25" />
+        <entry key="..\:/Users/Flutter/Desktop/n11_casestudy/app/src/main/res/layout/fragment_user_list.xml" value="0.1" />
+        <entry key="..\:/Users/Flutter/Desktop/n11_casestudy/app/src/main/res/layout/fragment_user_search.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Flutter/Desktop/n11_casestudy/app/src/main/res/layout/item_user.xml" value="0.22" />
+        <entry key="..\:/aaFLUTTER/AndroidStudioProjects/n11_casestudy/app/src/main/res/drawable-v24/ic_broken_image.xml" value="0.1" />
+        <entry key="..\:/aaFLUTTER/AndroidStudioProjects/n11_casestudy/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1235" />
+        <entry key="..\:/aaFLUTTER/AndroidStudioProjects/n11_casestudy/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/aaFLUTTER/AndroidStudioProjects/n11_casestudy/app/src/main/res/layout/fragment_user_avatar.xml" value="0.20416666666666666" />
+        <entry key="..\:/aaFLUTTER/AndroidStudioProjects/n11_casestudy/app/src/main/res/layout/fragment_user_detail.xml" value="0.25" />
+        <entry key="..\:/aaFLUTTER/AndroidStudioProjects/n11_casestudy/app/src/main/res/layout/fragment_user_list.xml" value="0.10955056179775281" />
+        <entry key="..\:/aaFLUTTER/AndroidStudioProjects/n11_casestudy/app/src/main/res/layout/fragment_user_search.xml" value="0.14859437751004015" />
+        <entry key="..\:/aaFLUTTER/AndroidStudioProjects/n11_casestudy/app/src/main/res/layout/item_user.xml" value="0.1" />
+        <entry key="..\:/aaFLUTTER/AndroidStudioProjects/n11_casestudy/app/src/main/res/layout/user_item.xml" value="0.33" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

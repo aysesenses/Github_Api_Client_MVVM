@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="user"
+            type="com.aysesenses.data.local.entitiy.UserEntity" />
+        <variable
+            name="viewModel"
+            type="com.aysesenses.n11_casestudy.ui.viewmodel.UserListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/userAvatarImageView"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/userAvatarImageViewDescription"
+            app:avatarImageUrl="@{user.avatar_url}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/loginTextView"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/loginText"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/userLoginTextView"
+            app:layout_constraintEnd_toStartOf="@+id/userAddFavoriteButton"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/userAvatarImageView"
+            app:layout_constraintTop_toTopOf="@+id/userAvatarImageView"
+            tools:text="Ayşe Şenses" />
+
+        <TextView
+            android:id="@+id/userLoginTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@{user.login}"
+            app:layout_constraintBottom_toBottomOf="@+id/userAvatarImageView"
+            app:layout_constraintEnd_toEndOf="@+id/loginTextView"
+            app:layout_constraintStart_toStartOf="@+id/loginTextView"
+            tools:text="aysesenses" />
+
+        <ImageView
+            android:id="@+id/userAddFavoriteButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:contentDescription="@string/userAvatarImageViewDescription"
+            android:onClick="@{() -> viewModel.favorite(user.login)}"
+            android:visibility="visible"
+            app:favorite="@{user.favorite}"
+            app:layout_constraintBottom_toBottomOf="@+id/userLoginTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/loginTextView"
+            app:layout_constraintVertical_bias="0.2"
+            app:srcCompat="@android:drawable/star_off" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="409dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userAvatarImageView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
