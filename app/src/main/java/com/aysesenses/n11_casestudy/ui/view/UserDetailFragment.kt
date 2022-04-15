@@ -29,19 +29,17 @@ class UserDetailFragment : Fragment() {
         //This is used so that the binding can observe LiveData updates
         binding.lifecycleOwner = viewLifecycleOwner
 
-        // Giving the binding access to the UserDetailViewModel
-        binding.viewModel = viewModel
-
         // Add observer for score
         viewModel.userDetail.observe(viewLifecycleOwner){
             (this.activity as AppCompatActivity).supportActionBar?.title = it.name
             binding.userDetail = it
+            it.login?.let { it1 -> viewModel.checkFavImage(it1,binding.userAddFavoriteButton) }
         }
 
         viewModel.getUserDetails(args.userlogin)
 
         binding.userAddFavoriteButton.setOnClickListener {
-         //   viewModel.favorite(binding.userLoginTextView.text as String,binding.userAddFavoriteButton)
+            viewModel.favorite(binding.userLoginTextView.text as String,binding.userAddFavoriteButton)
         }
 
         binding.userAvatarImageView.setOnClickListener {

@@ -2,6 +2,7 @@ package com.aysesenses.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.aysesenses.data.local.entitiy.UserEntity
 
@@ -17,7 +18,7 @@ interface AppDao {
     @Query("SELECT id, term, login, avatar_url, favorite FROM user WHERE login = :login ORDER BY id DESC")
     suspend fun getUserFavoriteStatus(login: String): List<UserEntity>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSearchResults(userEntities: List<UserEntity>)
 
     @Query("DELETE FROM user WHERE term = :term")

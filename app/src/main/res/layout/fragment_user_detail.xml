@@ -2,14 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="userDetail"
             type="com.aysesenses.domain.model.UserDetail" />
-        <variable
-            name="viewModel"
-            type="com.aysesenses.n11_casestudy.ui.viewmodel.UserDetailViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -21,8 +21,8 @@
             android:layout_height="72dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            app:avatarImageUrl="@{userDetail.avatar_url}"
             android:contentDescription="@string/userAvatarImageViewDescription"
+            app:avatarImageUrl="@{userDetail.avatar_url}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
@@ -34,9 +34,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="56dp"
+            android:text="@{userDetail.name}"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="@{userDetail.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/userAvatarImageView"
             app:layout_constraintTop_toTopOf="@+id/userAvatarImageView"
@@ -46,8 +46,8 @@
             android:id="@+id/userLoginTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
             android:text="@{userDetail.login}"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/userAvatarImageView"
             app:layout_constraintEnd_toEndOf="@+id/userNameTextView"
             app:layout_constraintStart_toStartOf="@+id/userNameTextView"
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="@{String.valueOf(viewModel.userDetail.followers)}"
+            android:text="@{String.valueOf(userDetail.followers)}"
             android:textAlignment="center"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -119,10 +119,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:text="@{String.valueOf(userDetail.following)}"
             android:textAlignment="center"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:text="@{String.valueOf(viewModel.userDetail.following)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/followersTextView"
@@ -161,10 +161,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:text="@{String.valueOf(userDetail.repos)}"
             android:textAlignment="center"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:text="@{String.valueOf(viewModel.userDetail.repos)}"
             app:layout_constraintEnd_toStartOf="@+id/gistsCountTextView"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -176,10 +176,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:text="@{String.valueOf(userDetail.gists)}"
             android:textAlignment="center"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:text="@{String.valueOf(viewModel.userDetail.gists)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/reposTextView"

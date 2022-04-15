@@ -19,7 +19,7 @@
         <action
             android:id="@+id/action_userDetailFragment_to_userListFragment"
             app:destination="@id/userListFragment"
-            app:popUpTo="@id/userListFragment" />
+             />
     </fragment>
     <fragment
         android:id="@+id/userAvatarFragment"
@@ -29,7 +29,7 @@
         <action
             android:id="@+id/action_userAvatarFragment_to_userDetailFragment"
             app:destination="@id/userDetailFragment"
-            app:popUpTo="@id/userDetailFragment" />
+            />
         <argument
             android:name="userAvatarUrl"
             app:argType="string"/>
@@ -42,15 +42,14 @@
         <action
             android:id="@+id/action_userListFragment_to_userDetailFragment"
             app:destination="@id/userDetailFragment"
-            app:popUpToSaveState="true"/>
+            />
         <argument
             android:name="term"
             app:argType="string"/>
         <action
             android:id="@+id/action_userListFragment_to_userSearchFragment"
             app:destination="@id/userSearchFragment"
-            app:popUpTo="@id/userSearchFragment"
-            app:popUpToInclusive="true" />
+            />
     </fragment>
     <fragment
         android:id="@+id/userSearchFragment"

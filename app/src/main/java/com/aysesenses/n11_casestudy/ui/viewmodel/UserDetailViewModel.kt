@@ -15,48 +15,51 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class UserDetailViewModel @Inject constructor(private  val githubApiService: GithubApiService, private val repository: RoomRepository,) : ViewModel() {
+class UserDetailViewModel @Inject constructor(
+    private val githubApiService: GithubApiService,
+    private val repository: RoomRepository,
+) : ViewModel() {
+
+    // Internally, we use a MutableLiveData, because we will be updating the  UserDetail
+    // with new values
     private val _userDetail = MutableLiveData<UserDetail>()
 
+    // The external LiveData interface to the property is immutable, so only this class can modify
     val userDetail: LiveData<UserDetail>
         get() = _userDetail
 
-    //
     fun getUserDetails(userLogin: String) {
         viewModelScope.launch {
             val getPropertiesDeferred = githubApiService.getUserDetails(userLogin)
-
             try {
                 _userDetail.value = getPropertiesDeferred.body()
-
             } catch (e: Exception) {
                 Log.e("userDetailErr", e.message.toString())
             }
         }
     }
 
-    fun favorite(login: String, imageView: ImageView) : Boolean{
-        Log.e("f",login)
+    fun favorite(login: String, imageView: ImageView): Boolean {
         var status = false
         viewModelScope.launch {
             val list = repository.getUserFavoriteStatus(login)
-            Log.e("before",list[0].favorite.toString())
-            if (list[0].favorite == "no"){
+            if (list[0].favorite == "no") {
                 repository.addFavorite(login)
-                Log.e("add","add favorite")
                 status = true
-            }else{
+            } else {
                 repository.removeFavorite(login)
-                Log.e("remove","remove favorite")
             }
-            val list2 = repository.getUserFavoriteStatus(login)
-            Log.e("after",list2[0].favorite.toString())
-            //!!!
-        // loadFromCache(list[0].term.toString())
-            updateImage(imageView,status)
+            updateImage(imageView, status)
+        }
+        return status
+    }
 
+    fun checkFavImage(login: String?, imageView: ImageView) {
+        viewModelScope.launch {
+            if (login?.let { repository.getUserFavoriteStatus(it)[0].favorite } == "yes") {
+                updateImage(imageView, true)
+            }
         }
 
-        return status
     }
 }

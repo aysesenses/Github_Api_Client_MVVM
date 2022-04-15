@@ -1,6 +1,5 @@
 package com.aysesenses.n11_casestudy.ui.adapter
 
-import android.util.Log
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -37,7 +36,7 @@ fun bindImage(userAvatarImageView: ImageView, userAvatarImageUrl: String?) {
 }
 
 @BindingAdapter("favorite")
-fun setImage(imageView: ImageView, favorite : String?) {
+fun setImage(imageView: ImageView, favorite: String?) {
     if (favorite == "no") {
         imageView.setImageResource(android.R.drawable.btn_star_big_off)
     } else {
@@ -46,13 +45,10 @@ fun setImage(imageView: ImageView, favorite : String?) {
 }
 
 @BindingAdapter("detailFavorite")
-fun updateImage(imageView: ImageView, favorite : Boolean) {
-
+fun updateImage(imageView: ImageView, favorite: Boolean) {
     if (favorite) {
-        Log.e("as","1")
         imageView.setImageResource(android.R.drawable.btn_star_big_on)
     } else {
-        Log.e("as","2")
         imageView.setImageResource(android.R.drawable.btn_star_big_off)
     }
 }

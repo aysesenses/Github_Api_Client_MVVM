@@ -8,13 +8,15 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.SearchView
-            android:elevation="20dp"
+            android:elevation="16dp"
             android:id="@+id/userSearchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
+            android:background="@drawable/search_background"
+            app:queryBackground="@android:color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />

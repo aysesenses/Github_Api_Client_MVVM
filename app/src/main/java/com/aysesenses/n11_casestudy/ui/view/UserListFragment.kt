@@ -1,6 +1,7 @@
 package com.aysesenses.n11_casestudy.ui.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +23,6 @@ class UserListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         val args: UserListFragmentArgs by navArgs()
 
         val binding = FragmentUserListBinding.inflate(inflater, container, false)
@@ -37,7 +37,7 @@ class UserListFragment : Fragment() {
         // to all the data in the ViewModel
         binding.viewModel = viewModel
 
-        viewModel.userSearch(args.term)
+        viewModel.userSearch(args.term) //!!!
 
         binding.userListRecyclerView.adapter = UserListAdapter(UserListAdapter.OnClickListener {
             val action = it.login.let { login ->
@@ -52,7 +52,6 @@ class UserListFragment : Fragment() {
         viewModel.users.observe(viewLifecycleOwner) {
             bindRecyclerView(binding.userListRecyclerView, it)
         }
-
         return binding.root
     }
 }
