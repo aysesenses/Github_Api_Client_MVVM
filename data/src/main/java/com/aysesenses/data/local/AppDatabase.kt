@@ -5,9 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.aysesenses.data.local.dao.AppDao
+import com.aysesenses.data.local.entitiy.UserDetailsEntity
 import com.aysesenses.data.local.entitiy.UserEntity
 
-@Database(entities = [UserEntity::class], version = 1, exportSchema = false)
+@Database(entities = [UserEntity::class, UserDetailsEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun getDAO(): AppDao

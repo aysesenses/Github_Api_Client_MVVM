@@ -7,7 +7,7 @@
 
         <variable
             name="userDetail"
-            type="com.aysesenses.domain.model.UserDetail" />
+            type="com.aysesenses.data.local.entitiy.UserDetailsEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

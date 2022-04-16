@@ -6,7 +6,6 @@ import com.aysesenses.data.firebase.FirestoreRepository
 import com.aysesenses.data.local.entitiy.UserEntity
 import com.aysesenses.data.local.repository.RoomRepository
 import com.aysesenses.data.network.api.GithubApiService
-import com.google.firebase.firestore.auth.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserListViewModel @Inject constructor(
-    private val repository: RoomRepository,
+    private val roomRepository: RoomRepository,
     private val firestoreRepository: FirestoreRepository,
     private  val githubApiService: GithubApiService,
 ) :
@@ -31,8 +30,9 @@ class UserListViewModel @Inject constructor(
     private val userEntities: MutableList<UserEntity> = mutableListOf()
     private val mutableMap: MutableMap<String?, Any?> = mutableMapOf()
 
-
-    fun userSearch(term: String) {
+     //With keyword "term" the results are retrieved first
+     //from the local database and then from the api query
+     fun userSearch(term: String) {
         loadFromCache(term)
         viewModelScope.launch {
             val getPropertiesDeferred = githubApiService.searchUser(term)
@@ -56,7 +56,7 @@ class UserListViewModel @Inject constructor(
                 updateSearchResults(userEntities, term)
                 firestoreRepository.saveSearchResults(mutableMap,term)
             } catch (e: Exception) {
-                Log.e("userListErr", e.message.toString())
+                Log.e("userListError", e.message.toString())
             }
         }
     }
@@ -64,41 +64,38 @@ class UserListViewModel @Inject constructor(
     //This method to favorite users
     fun favorite(login: String){
         viewModelScope.launch {
-            val list = repository.getUserFavoriteStatus(login)
+            val list = roomRepository.getUserFavoriteStatus(login)
             if (list.isNotEmpty()){
                 if (list[0].favorite == "no"){
-                    repository.addFavorite(login)
+                    roomRepository.addFavorite(login)
                 }else{
-                    repository.removeFavorite(login)
+                    roomRepository.removeFavorite(login)
                 }
                 loadFromCache(list[0].term.toString())
             }
         }
 
     }
-
+    //The current favorite information is retrieved from the local database and
+    //The results from the api are added to the local database
     private fun updateSearchResults(userEntities: List<UserEntity>, term: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val favs = repository.getFavorites(term)
-            repository.insertSearchResults(userEntities)
-            if (favs.isNotEmpty()){
-                favs.forEach {
+            val favorites = roomRepository.getFavorites(term)
+            roomRepository.insertSearchResults(userEntities)
+            if (favorites.isNotEmpty()){
+                favorites.forEach {
                     favorite(it.login.toString())
                 }
             }
-            loadFromCache(term)
+           loadFromCache(term)
         }
     }
 
-    //Re-returns the results from the database
+    //The results retrieving from the database
     private fun loadFromCache(term: String) {
         viewModelScope.launch() {
-            val list = repository.getSearchResults(term)
-            if (list.isNotEmpty()){
-                _users.value = list
-            }else{
-                Log.e("boş","boş dürüm")
-            }
+            val list = roomRepository.getSearchResults(term)
+            _users.value = list
         }
     }
 }

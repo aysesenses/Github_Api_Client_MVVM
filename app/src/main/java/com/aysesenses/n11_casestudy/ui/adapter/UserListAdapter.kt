@@ -1,5 +1,6 @@
 package com.aysesenses.n11_casestudy.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -12,14 +13,13 @@ import com.aysesenses.n11_casestudy.ui.viewmodel.UserListViewModel
 class UserListAdapter(
     private val onClickListener: OnClickListener,
     private val viewModel: UserListViewModel
-    ) : ListAdapter<UserEntity, UserListAdapter.UserViewHolder>(DiffCallback) {
+    ) : ListAdapter<UserEntity, UserListAdapter.UserViewHolder>(DiffCallback()) {
 
     class UserViewHolder(private var binding: ItemUserBinding, private val viewModel: UserListViewModel) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(user: UserEntity) {
             binding.user = user
             binding.viewModel = viewModel
-
             // It forces the data binding to execute immediately,
             // which allows the RecyclerView to make the correct view size measurements
             binding.executePendingBindings()
@@ -38,12 +38,15 @@ class UserListAdapter(
         holder.bind(user)
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<UserEntity>() {
+    class DiffCallback : DiffUtil.ItemCallback<UserEntity>() {
+
         override fun areItemsTheSame(oldItem: UserEntity, newItem: UserEntity): Boolean {
+            Log.e("diff","1"+oldItem.favorite+" yeni "+newItem.favorite)
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(oldItem: UserEntity, newItem: UserEntity): Boolean {
+            Log.e("diff","2"+oldItem.login+" yeni "+newItem.login)
             return oldItem.favorite == newItem.favorite
         }
     }

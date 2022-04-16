@@ -1,8 +1,10 @@
 package com.aysesenses.data.local.repository
 
 import com.aysesenses.data.local.dao.AppDao
+import com.aysesenses.data.local.entitiy.UserDetailsEntity
 import com.aysesenses.data.local.entitiy.UserEntity
 import com.aysesenses.domain.model.User
+import com.aysesenses.domain.model.UserDetail
 import javax.inject.Inject
 
 class RoomRepository @Inject constructor(private val appDao: AppDao) {
@@ -19,8 +21,12 @@ class RoomRepository @Inject constructor(private val appDao: AppDao) {
         appDao.insertSearchResults(userEntities)
     }
 
-    suspend fun deleteSearchResults(term: String) {
-        appDao.deleteSearchResults(term)
+    suspend fun getUserDetail(login: String): UserDetailsEntity {
+        return appDao.getUserDetail(login)
+    }
+
+    suspend fun insertUserDetail(userDetailsEntity: UserDetailsEntity?) {
+        appDao.insertUserDetail(userDetailsEntity)
     }
 
     suspend fun getUserFavoriteStatus(term: String): List<UserEntity> {
