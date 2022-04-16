@@ -24,11 +24,6 @@ class UserListFragment : Fragment() {
 
     private val args: UserListFragmentArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.userSearch(args.term) //!!!
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +38,7 @@ class UserListFragment : Fragment() {
         // Set the viewmodel for databinding - this allows the bound layout access
         // to all the data in the ViewModel
         binding.viewModel = viewModel
+        viewModel.userSearch(args.term) //!!!
 
         binding.userListRecyclerView.adapter = UserListAdapter(UserListAdapter.OnClickListener {
             val action = it.login.let { login ->

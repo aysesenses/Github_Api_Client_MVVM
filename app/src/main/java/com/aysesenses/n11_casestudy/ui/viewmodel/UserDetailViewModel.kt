@@ -49,7 +49,7 @@ class UserDetailViewModel @Inject constructor(
                 updateUserDetail(userDetailsEntity, userLogin)
 
             } catch (e: Exception) {
-                Log.e("userDetailErr", e.message.toString())
+                Log.e("userDetailError", e.message.toString())
             }
         }
     }
@@ -61,17 +61,17 @@ class UserDetailViewModel @Inject constructor(
         }
     }
 
-    fun favorite(login: String, imageView: ImageView): Boolean {
+    fun favorite(login: String, imageView: ImageView) : Boolean{
         var status = false
         viewModelScope.launch {
             val list = roomRepository.getUserFavoriteStatus(login)
-            if (list[0].favorite == "no") {
+            if (list[0].favorite == "no"){
                 roomRepository.addFavorite(login)
                 status = true
-            } else {
+            }else{
                 roomRepository.removeFavorite(login)
             }
-            updateImage(imageView, status)
+            updateImage(imageView,status)
         }
         return status
     }
@@ -82,14 +82,13 @@ class UserDetailViewModel @Inject constructor(
                 updateImage(imageView, true)
             }
         }
-
     }
 
     //The results retrieving from the database
     private fun loadFromCache(login: String) {
         viewModelScope.launch() {
             val userDetail = roomRepository.getUserDetail(login)
-            _userDetail.value = userDetail
+                _userDetail.value = userDetail
         }
     }
 }

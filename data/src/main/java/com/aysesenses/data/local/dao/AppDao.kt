@@ -26,7 +26,7 @@ interface AppDao {
     @Query("SELECT id, term, login, avatar_url, favorite FROM user WHERE login = :login ORDER BY id DESC")
     suspend fun getUserFavoriteStatus(login: String): List<UserEntity>
 
-    @Query("SELECT * FROM user WHERE login = :login ORDER BY id DESC")
+    @Query("SELECT * FROM user_details WHERE login = :login ORDER BY id DESC")
     suspend fun getUserDetail(login: String): UserDetailsEntity
 
     @Query("DELETE FROM user WHERE term = :term")
