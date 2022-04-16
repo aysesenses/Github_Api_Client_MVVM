@@ -12,10 +12,10 @@ interface GithubApiService {
     //Annotate the method with @GET, specifying the endpoint for the JSON github users response,
     //and create the Retrofit REsponse object that will start the HTTP request
     @GET("search/users")
-   suspend fun searchUser(@Query("q") q: String):
+   suspend fun searchUser(@Query("q") q: String?):
             Response<UserListResponse>
 
     @GET("users/{user}")
-   suspend fun getUserDetails(@Path("user") user: String):
+   suspend fun getUserDetails(@Path("user") user: String?):
             Response<UserDetail>
 }

@@ -15,7 +15,7 @@ import javax.inject.Inject
 class UserListViewModel @Inject constructor(
     private val roomRepository: RoomRepository,
     private val firestoreRepository: FirestoreRepository,
-    private  val githubApiService: GithubApiService,
+    private val githubApiService: GithubApiService,
 ) :
     ViewModel() {
 
@@ -30,9 +30,9 @@ class UserListViewModel @Inject constructor(
     private val userEntities: MutableList<UserEntity> = mutableListOf()
     private val mutableMap: MutableMap<String?, Any?> = mutableMapOf()
 
-     //With keyword "term" the results are retrieved first
-     //from the local database and then from the api query
-     fun userSearch(term: String) {
+    //With keyword "term" the results are retrieved first
+    //from the local database and then from the api query
+    fun userSearch(term: String?) {
         loadFromCache(term)
         viewModelScope.launch {
             val getPropertiesDeferred = githubApiService.searchUser(term)
@@ -49,53 +49,65 @@ class UserListViewModel @Inject constructor(
                             favorite = "no"
                         )
                     )
-                    //This map will save all incoming users from firebase
-                    mutableMap.put(term,userEntities)
-                }
 
+                    //This map will save all incoming users from firebase
+                    mutableMap.put(term, userEntities)
+                }
                 updateSearchResults(userEntities, term)
-                firestoreRepository.saveSearchResults(mutableMap,term)
+                firestoreRepository.saveSearchResults(mutableMap, term)
             } catch (e: Exception) {
-                Log.e("userListError", e.message.toString())
+                Log.e("UserListViewModel", e.message.toString())
             }
         }
     }
 
     //This method to favorite users
-    fun favorite(login: String){
+    fun favorite(login: String?) {
         viewModelScope.launch {
-            val list = roomRepository.getUserFavoriteStatus(login)
-            if (list.isNotEmpty()){
-                if (list[0].favorite == "no"){
-                    roomRepository.addFavorite(login)
-                }else{
-                    roomRepository.removeFavorite(login)
+            try {
+                val list = roomRepository.getUserFavoriteStatus(login)
+                if (list.isNotEmpty()) {
+                    if (list[0].favorite == "no") {
+                        roomRepository.addFavorite(login)
+                    } else {
+                        roomRepository.removeFavorite(login)
+                    }
+                    loadFromCache(list[0].term.toString())
                 }
-                loadFromCache(list[0].term.toString())
+            } catch (e: Exception) {
+                Log.e("UserListViewModel", e.message.toString())
             }
         }
-
     }
+
     //The current favorite information is retrieved from the local database and
     //The results from the api are added to the local database
-    private fun updateSearchResults(userEntities: List<UserEntity>, term: String) {
+    private fun updateSearchResults(userEntities: List<UserEntity>, term: String?) {
         viewModelScope.launch(Dispatchers.IO) {
-            val favorites = roomRepository.getFavorites(term)
-            roomRepository.insertSearchResults(userEntities)
-            if (favorites.isNotEmpty()){
-                favorites.forEach {
-                    favorite(it.login.toString())
+            try {
+                val favorites = roomRepository.getFavorites(term)
+                roomRepository.insertSearchResults(userEntities)
+                if (!favorites.isNullOrEmpty()) {
+                    favorites.forEach {
+                        favorite(it.login.toString())
+                    }
                 }
+                loadFromCache(term)
+            } catch (e: Exception) {
+                Log.e("UserListViewModel", e.message.toString())
             }
-           loadFromCache(term)
         }
     }
 
     //The results retrieving from the database
-    private fun loadFromCache(term: String) {
+    private fun loadFromCache(term: String?) {
         viewModelScope.launch() {
-            val list = roomRepository.getSearchResults(term)
-            _users.value = list
+            try {
+                val list = roomRepository.getSearchResults(term)
+                _users.value = list
+            } catch (e: Exception) {
+                Log.e("UserListViewModel", e.message.toString())
+            }
         }
     }
 }

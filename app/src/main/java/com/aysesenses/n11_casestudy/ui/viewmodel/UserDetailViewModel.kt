@@ -49,46 +49,66 @@ class UserDetailViewModel @Inject constructor(
                 updateUserDetail(userDetailsEntity, userLogin)
 
             } catch (e: Exception) {
-                Log.e("userDetailError", e.message.toString())
+                Log.e("UserDetailViewModel", e.message.toString())
             }
         }
     }
 
-    private fun updateUserDetail(userDetailsEntity: UserDetailsEntity?, login: String) {
+    private fun updateUserDetail(userDetailsEntity: UserDetailsEntity?, login: String?) {
         viewModelScope.launch(Dispatchers.IO) {
-            roomRepository.insertUserDetail(userDetailsEntity)
-            loadFromCache(login)
+            try {
+                roomRepository.insertUserDetail(userDetailsEntity)
+                loadFromCache(login)
+            } catch (e: Exception) {
+                Log.e("UserDetailViewModel", e.message.toString())
+            }
         }
     }
 
-    fun favorite(login: String, imageView: ImageView) : Boolean{
+    fun favorite(login: String, imageView: ImageView): Boolean {
         var status = false
         viewModelScope.launch {
-            val list = roomRepository.getUserFavoriteStatus(login)
-            if (list[0].favorite == "no"){
-                roomRepository.addFavorite(login)
-                status = true
-            }else{
-                roomRepository.removeFavorite(login)
+            try {
+                val list = roomRepository.getUserFavoriteStatus(login)
+                if (list[0].favorite == "no") {
+                    roomRepository.addFavorite(login)
+                    status = true
+                } else {
+                    roomRepository.removeFavorite(login)
+                }
+                updateImage(imageView, status)
+
+            } catch (e: Exception) {
+                Log.e("UserDetailViewModel", e.message.toString())
             }
-            updateImage(imageView,status)
         }
         return status
+
     }
 
     fun checkFavImage(login: String?, imageView: ImageView) {
         viewModelScope.launch {
-            if (login?.let { roomRepository.getUserFavoriteStatus(it)[0].favorite } == "yes") {
-                updateImage(imageView, true)
+            try {
+                if (login?.let { roomRepository.getUserFavoriteStatus(it)[0].favorite } == "yes") {
+                    updateImage(imageView, true)
+                }
+            } catch (e: Exception) {
+                Log.e("UserDetailViewModel", e.message.toString())
             }
         }
     }
 
     //The results retrieving from the database
-    private fun loadFromCache(login: String) {
+    private fun loadFromCache(login: String?) {
         viewModelScope.launch() {
-            val userDetail = roomRepository.getUserDetail(login)
-                _userDetail.value = userDetail
+            try {
+                val userDetail = roomRepository.getUserDetail(login)
+                userDetail.let {
+                    _userDetail.value = userDetail!!
+                }
+            } catch (e: Exception) {
+                Log.e("UserDetailViewModel", e.message.toString())
+            }
         }
     }
 }
